@@ -31,8 +31,10 @@ function getExpiredKey() {
 export const getSchoolById = async (id: string): Promise<AuthApiSchoolData> => {
     const fetchOption: FetchOptions = {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: { 
+            "Content-Type": "application/json"
+        }, 
+        credentials: "omit",
     };
     return await fetch(`https://project-pkmon-server.herokuapp.com/${id}`, fetchOption)
         .then((res) => res.json())
@@ -76,7 +78,7 @@ export const createSchoolNoImg = async (formData: schoolFields): Promise<any> =>
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
-            credentials: 'include',
+            credentials: 'omit',
         };
         return await fetch(`https://project-pkmon-server.herokuapp.com/n/${sessionId.value}`, fetchOptions)
             .then((res) => res.json())
@@ -92,7 +94,7 @@ export const createSchoolNoImg = async (formData: schoolFields): Promise<any> =>
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
-            credentials: 'include',
+            credentials: 'omit',
         };
         return await fetch(`https://project-pkmon-server.herokuapp.com/n/${tempID}`, fetchOptions)
             .then((res) => res.json())
@@ -122,7 +124,7 @@ export const updateSchoolNoImg = async (formData: schoolFields, id: string, crea
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
-            credentials: 'include',
+            credentials: 'omit',
         };
         return await fetch(`https://project-pkmon-server.herokuapp.com/n/${id}/${creatorId}}`, fetchOptions)
             .then((res) => res.json())
@@ -137,7 +139,7 @@ export const getAllSchools = async (): Promise<AuthApiData> => {
     const fetchOptions: FetchOptions = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        credentials: 'omit',
     };
     return await fetch('https://project-pkmon-server.herokuapp.com/schools', fetchOptions)
         .then((res) => res.json())
