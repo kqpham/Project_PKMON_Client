@@ -3,7 +3,6 @@ import { AuthApiData, AuthApiSchoolData } from "../../interface/AuthApiData";
 import { FetchOptions } from "../../interface/FetchOptions";
 import { v4 as uuidv4 } from 'uuid';
 import { schoolFields } from "../../interface/School";
-import {axiosInstance} from "../../config";
 
 function setTokenExpiry(value: string) {
     const now = new Date();
@@ -46,7 +45,7 @@ export const createSchool = async (formData: FormData): Promise<any> => {
     
     const sessionId = getExpiredKey();
     if (sessionId != null) {
-        return await axiosInstance({
+        return await axios({
            method: "post",
            url:  `/${sessionId.value}`,
            data: formData,
@@ -57,9 +56,9 @@ export const createSchool = async (formData: FormData): Promise<any> => {
     } else {
         const tempID = uuidv4();
         setTokenExpiry(tempID);
-        return await axiosInstance({
+        return await axios({
             method: "post",
-            url:  `/${tempID}`,
+            url:  `https://project-pkmon-server.herokuapp.com/${tempID}`,
             data: formData,
             headers: {'Content-Type': "multipart/form-data"},
          }).then((res) => { return res.data }).catch(() => ({
@@ -108,7 +107,7 @@ export const updateSchool = async (formData: FormData, id: string, creatorId: st
 
     return await axios({
        method: "patch",
-       url:  `/${id}/${creatorId}`,
+       url:  `https://project-pkmon-server.herokuapp.com/${id}/${creatorId}`,
        data: formData,
        headers: {'Content-Type': "multipart/form-data"},
     }).then((res) => { return res.data }).catch(() => ({
