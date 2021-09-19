@@ -29,7 +29,6 @@ export default function Home(): JSX.Element {
     }
     fetchAllSchools();
   }, []);
-  console.log(allSchools);
   return (
     <Grid container justifyContent="center" className={classes.container}>
       <NavBar />

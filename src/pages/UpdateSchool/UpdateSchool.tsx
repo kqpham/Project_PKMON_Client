@@ -165,7 +165,7 @@ export default function UpdateSchool(): JSX.Element {
               />
               <Button
                 size="small"
-                onClick={(event) => {
+                onClick={(event: { preventDefault: () => void; }) => {
                   event.preventDefault();
                   removeFile();
                 }}
