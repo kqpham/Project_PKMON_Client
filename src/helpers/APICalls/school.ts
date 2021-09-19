@@ -3,6 +3,7 @@ import { AuthApiData, AuthApiSchoolData } from "../../interface/AuthApiData";
 import { FetchOptions } from "../../interface/FetchOptions";
 import { v4 as uuidv4 } from 'uuid';
 import { schoolFields } from "../../interface/School";
+import {axiosInstance} from "../../config";
 
 function setTokenExpiry(value: string) {
     const now = new Date();
@@ -34,7 +35,7 @@ export const getSchoolById = async (id: string): Promise<AuthApiSchoolData> => {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
     };
-    return await fetch(`/${id}`, fetchOption)
+    return await fetch(`https://project-pkmon-server.herokuapp.com/${id}`, fetchOption)
         .then((res) => res.json())
         .catch(() => ({
             error: { message: "Unable to connect to server. Please try again" },
@@ -45,7 +46,7 @@ export const createSchool = async (formData: FormData): Promise<any> => {
     
     const sessionId = getExpiredKey();
     if (sessionId != null) {
-        return await axios({
+        return await axiosInstance({
            method: "post",
            url:  `/${sessionId.value}`,
            data: formData,
@@ -56,7 +57,7 @@ export const createSchool = async (formData: FormData): Promise<any> => {
     } else {
         const tempID = uuidv4();
         setTokenExpiry(tempID);
-        return await axios({
+        return await axiosInstance({
             method: "post",
             url:  `/${tempID}`,
             data: formData,
@@ -78,7 +79,7 @@ export const createSchoolNoImg = async (formData: schoolFields): Promise<any> =>
             body: JSON.stringify(formData),
             credentials: 'include',
         };
-        return await fetch(`/n/${sessionId.value}`, fetchOptions)
+        return await fetch(`https://project-pkmon-server.herokuapp.com/n/${sessionId.value}`, fetchOptions)
             .then((res) => res.json())
             .catch(() => ({
                 error: { message: 'Unable to connect to server. Please try again' },
@@ -94,7 +95,7 @@ export const createSchoolNoImg = async (formData: schoolFields): Promise<any> =>
             body: JSON.stringify(formData),
             credentials: 'include',
         };
-        return await fetch(`/n/${tempID}`, fetchOptions)
+        return await fetch(`https://project-pkmon-server.herokuapp.com/n/${tempID}`, fetchOptions)
             .then((res) => res.json())
             .catch(() => ({
                 error: { message: 'Unable to connect to server. Please try again' },
@@ -124,7 +125,7 @@ export const updateSchoolNoImg = async (formData: schoolFields, id: string, crea
             body: JSON.stringify(formData),
             credentials: 'include',
         };
-        return await fetch(`/n/${id}/${creatorId}}`, fetchOptions)
+        return await fetch(`https://project-pkmon-server.herokuapp.com/n/${id}/${creatorId}}`, fetchOptions)
             .then((res) => res.json())
             .catch(() => ({
                 error: { message: 'Unable to connect to server. Please try again' },
@@ -139,7 +140,7 @@ export const getAllSchools = async (): Promise<AuthApiData> => {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
     };
-    return await fetch('/schools', fetchOptions)
+    return await fetch('https://project-pkmon-server.herokuapp.com/schools', fetchOptions)
         .then((res) => res.json())
         .catch(() => ({
             error: { message: 'Unable to connect to server. Please try again' },
