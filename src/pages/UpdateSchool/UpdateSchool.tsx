@@ -92,7 +92,7 @@ export default function UpdateSchool(): JSX.Element {
   };
 
   const removeFile = () => {
-    const reseter = undefined;
+    const reseter = new File();
     setInputFile(reseter);
     setHideButton("none");
   };
