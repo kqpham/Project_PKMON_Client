@@ -27,7 +27,6 @@ export default function UpdateSchool(): JSX.Element {
   const [inputFile, setInputFile] = useState<File>();
   const [sessionToken, setSessionToken] = useState<string>();
   const [schoolInfo, setSchoolInfo] = useState<iSchool>();
-  const [hideButton, setHideButton] = useState<string>();
   const [formInput, setFormInput] = useState({
     schoolName: "",
     schoolAbout: "",
@@ -87,14 +86,7 @@ export default function UpdateSchool(): JSX.Element {
   }: React.ChangeEvent<HTMLInputElement>) => {
     if (files && files.length) {
       setInputFile(files[0]);
-      setHideButton("block");
     }
-  };
-
-  const removeFile = () => {
-    const nFile = undefined
-    setInputFile(nFile);
-    setHideButton("none");
   };
 
   useEffect(() => {
@@ -163,18 +155,6 @@ export default function UpdateSchool(): JSX.Element {
                 accept="image/*"
                 onChange={handleImageChange}
               />
-              <Button
-                size="small"
-                onClick={(event: { preventDefault: () => void; }) => {
-                  event.preventDefault();
-                  removeFile();
-                }}
-                style={{ display: `${hideButton}` }}
-              >
-                {" "}
-                Remove File
-              </Button>
-
               <Typography>Name:</Typography>
               {schoolInfo?.schoolName ? (
                 <TextField
