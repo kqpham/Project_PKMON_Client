@@ -92,10 +92,7 @@ export default function UpdateSchool(): JSX.Element {
   };
 
   const removeFile = () => {
-    const nBlob = new Blob(undefined);
-    const nArray = new Array<Blob>();
-    nArray.push(nBlob);
-    const nFile = new File(nArray, "undefined");
+    const nFile = undefined
     setInputFile(nFile);
     setHideButton("none");
   };
