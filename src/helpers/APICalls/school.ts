@@ -108,7 +108,7 @@ export const createSchoolNoImg = async (formData: schoolFields): Promise<any> =>
 export const updateSchool = async (formData: FormData, id: string, creatorId: string): Promise<any> => {
 
     return await axios({
-       method: "patch",
+       method: "PATCH",
        url:  `https://project-pkmon-server.herokuapp.com/${id}/${creatorId}`,
        data: formData,
        headers: {'Content-Type': "multipart/form-data"},
@@ -121,7 +121,7 @@ export const updateSchool = async (formData: FormData, id: string, creatorId: st
 export const updateSchoolNoImg = async (formData: schoolFields, id: string, creatorId: string): Promise<any> => {
     
         const fetchOptions: FetchOptions = {
-            method: 'POST',
+            method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
             credentials: 'omit',
